@@ -15,6 +15,9 @@
     "nuxt": "^3.4.3"
   },
   "dependencies": {
-    "@nuxtjs/tailwindcss": "^6.6.8"
+    "@aws-amplify/ui-vue": "^3.1.16",
+    "@invictus.codes/nuxt-vuetify": "^0.2.20",
+    "@nuxtjs/tailwindcss": "^6.6.8",
+    "aws-amplify": "^5.2.2"
   }
 }
