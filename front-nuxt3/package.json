@@ -18,6 +18,8 @@
     "@aws-amplify/ui-vue": "^3.1.16",
     "@invictus.codes/nuxt-vuetify": "^0.2.20",
     "@nuxtjs/tailwindcss": "^6.6.8",
-    "aws-amplify": "^5.2.2"
+    "@pinia/nuxt": "^0.4.11",
+    "aws-amplify": "^5.2.2",
+    "pinia": "^2.1.3"
   }
 }

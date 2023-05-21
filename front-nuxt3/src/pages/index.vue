@@ -1,19 +1,59 @@
-<script setup>
-import { Authenticator } from "@aws-amplify/ui-vue";
-import "@aws-amplify/ui-vue/styles.css";
+<script setup lang="ts">
+import { ref, onUnmounted, watch } from "vue"
+import { OnCreateTodoSubscription, GetTodoQuery } from "@/API"
+import { API, graphqlOperation } from 'aws-amplify'
+import { GraphQLQuery, GraphQLSubscription } from '@aws-amplify/api';
+import { onCreateTodo } from "@/graphql/subscriptions"
+import { useTweetStore } from "@/stores/tweet"
+import { listTodos } from "@/graphql/queries"
 
-import { Amplify } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+const tweetStore=useTweetStore()
 
-Amplify.configure(awsconfig);
+/**
+ * Queries
+ */
+const tweets=ref<any>("");
+const updateTweets = async () => {
+	tweets.value=await API.graphql<GraphQLQuery<GetTodoQuery>>(
+		{
+			query: listTodos,
+			variables: {
+				sortField: "createdAt",
+				sortDirection: "DESC"
+			}
+		},
+	)
+	tweetStore.tweets=tweets.value.data.listTodos.items;
+}
+updateTweets();
+
+/**
+ * Subscriptions
+ */
+const createSub=API.graphql<GraphQLSubscription<OnCreateTodoSubscription>>(
+	graphqlOperation(onCreateTodo)
+).subscribe({
+	next: (data: any) => {
+		// サブスクリプションの通知を処理する
+		updateTweets();
+	},
+	error: (error: any) => {
+		console.error("Subscription error:", error)
+	},
+	complete: () => {
+		console.log("unsubscribed");
+	}
+})
+
+/**
+ * unMounted Subscriptions
+ */
+onUnmounted(() => {
+	createSub.unsubscribe()
+})
 </script>
 
 <template>
-	<authenticator>
-		<template v-slot="{ user, signOut }">
-			<h1>Hello {{user.username}}!</h1>
-			<addtodo />
-			<v-btn @click="signOut">Sign Out</v-btn>
-		</template>
-	</authenticator>
+	<alltweets />
+	<addTweet />
 </template>

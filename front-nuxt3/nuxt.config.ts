@@ -1,11 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss",  '@invictus.codes/nuxt-vuetify'],
+  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss",  '@invictus.codes/nuxt-vuetify', "@pinia/nuxt"],
   srcDir: "src/",
   apollo: {
     clients: {
 		  default: './apollo/default.ts',
     },
+  },
+  pinia: {
+    autoImports: ["defineStore"],
   },
   vuetify: {
     /* vuetify options */
