@@ -6,8 +6,8 @@
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 7,
-      "apiKeyExpirationDate": "2023-05-27T20:06:48.934Z",
-      "keyDescription": "graphql-twitter-login"
+      "apiKeyExpirationDate": "2023-05-27T22:24:44.318Z",
+      "keyDescription": "twitter"
     }
   }
 }

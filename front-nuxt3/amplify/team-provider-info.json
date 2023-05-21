@@ -12,11 +12,11 @@
       "AmplifyAppId": "dmiuc2v6pmlq6"
     },
     "categories": {
-      "api": {
-        "graphql": {}
-      },
       "auth": {
         "graphql9ec3d411": {}
+      },
+      "api": {
+        "graphql": {}
       }
     }
   }
