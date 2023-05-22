@@ -1,9 +1,6 @@
 <template>
-	<v-textarea label="Label" v-model="description"></v-textarea>
-	{{ description }}
-	<v-btn @click="add">
-		Button
-	</v-btn>
+	<v-textarea label="つぶやき" v-model="description"></v-textarea>
+	<v-btn @click="add">つぶやく</v-btn>
 </template>
 
 <script setup lang="ts">
@@ -17,12 +14,12 @@ import { useUserStore } from "@/stores/user"
 const user=useUserStore();
 const description = ref<string>("");
 const add= async () => {
-	// console.log(user.getMail)
-	const newTodo=await API.graphql<GraphQLQuery<CreateTodoMutation>>(
+	await API.graphql<GraphQLQuery<CreateTodoMutation>>(
 		{
 			query: createTodo,
 			variables: { input: { name: user.email, description: description.value } as CreateTodoInput },
 		}
 	)
+	description.value = ""
 }
 </script>

@@ -9,7 +9,6 @@ import { useUserStore } from "@/stores/user";
 Amplify.configure(awsconfig);
 
 const drawer=ref(true);
-const items=ref({ title: "Home", icon: "icon" });
 const rail=ref(true);
 const { route, user, signOut } = toRefs(useAuthenticator());
 watch(user, () => {
@@ -18,6 +17,8 @@ watch(user, () => {
 		userStore.user = user.value;
 	}
 })
+
+const item = ref<string>("home");
 </script>
 
 <template>
@@ -34,9 +35,9 @@ watch(user, () => {
 						</v-list-item>
 						<v-divider></v-divider>
 						<v-list density="compact" nav>
-							<v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
-							<v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-							<v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+							<v-list-item @click="item = 'home'" prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+							<v-list-item @click="item = 'account'" prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
+							<v-list-item @click="item = 'users'" prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
 						</v-list>
 						<template v-slot:append>
 							<div class="pa-2">

@@ -49,6 +49,7 @@ const createSub=API.graphql<GraphQLSubscription<OnCreateTodoSubscription>>(
  * unMounted Subscriptions
  */
 onUnmounted(() => {
+	console.log("onUnmounted")
 	createSub.unsubscribe()
 })
 </script>
