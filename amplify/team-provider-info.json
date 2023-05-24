@@ -17,6 +17,12 @@
       },
       "api": {
         "graphql": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dmiuc2v6pmlq6",
+          "type": "manual"
+        }
       }
     }
   }

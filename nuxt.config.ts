@@ -1,12 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss",  '@invictus.codes/nuxt-vuetify', "@pinia/nuxt"],
+  modules: ["@nuxtjs/tailwindcss",  '@invictus.codes/nuxt-vuetify', "@pinia/nuxt"],
   srcDir: "src/",
-  apollo: {
-    clients: {
-		  default: './apollo/default.ts',
-    },
-  },
   pinia: {
     autoImports: ["defineStore"],
   },
@@ -25,9 +20,13 @@ export default defineNuxtConfig({
     }
   },
   ssr: false,
+  nitro: {
+    preset: 'aws-lambda',
+    serveStatic: true,
+  },
   vite: {
     define: {
-      global: {},
+      "window.global": {},
     },
-  }
+  },
 });
